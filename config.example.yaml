@@ -1,0 +1,32 @@
+# Copy to config.yaml and adjust for your hardware:
+#   cp config.example.yaml config.yaml
+
+rotor:
+  type: stepper            # stepper | simulated
+  pins: [17, 18, 27, 22]   # BCM GPIO numbers for the 4 driver inputs (IN1..IN4)
+  steps_per_rev: 4096      # half-steps per full turn of the output shaft
+  min_angle: -90           # degrees, relative to the home position
+  max_angle: 90
+  step_delay_s: 0.002      # lower = faster, but too low can stall the motor
+
+wifi:
+  source: iw               # iw | simulated
+  interface: wlan0         # use the interface that has the external antenna
+  samples: 3               # readings averaged per measurement
+  sample_interval_s: 0.2
+
+tracker:
+  scan_step_deg: 10        # angle step during the full sweep
+  settle_s: 0.5            # wait after each move before reading signal
+  probe_delta_deg: 5       # left/right probe size while tracking
+  hysteresis_db: 2.0       # signal must improve by this much to move
+  rescan_drop_db: 10       # sweep again if signal falls this far below best
+  interval_s: 2.0          # pause between tracking steps
+
+display:
+  type: lcd                # lcd | console | none
+  i2c_address: 0x27
+  cols: 16
+  rows: 2
+
+log_level: INFO
